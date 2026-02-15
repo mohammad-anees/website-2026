@@ -14,7 +14,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Baby, BotMessageSquare, Car, Fuel, KeySquare, Pyramid, X } from "lucide-react"
-import { projects } from "./projects.data"
+import { projects, mags } from "./projects.data"
 
 export function AppSidebar() {
     return (
@@ -59,22 +59,16 @@ export function AppSidebar() {
                 <SidebarGroupLabel>Yusra Mag</SidebarGroupLabel>
                 <SidebarGroupContent>
                     <SidebarMenu>
-                        <SidebarMenuItem key="yusra-mag-2">
-                            <SidebarMenuButton asChild>
-                                <a href="/">
-                                    <Baby />
-                                    <span>Year 2</span>
-                                </a>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem key="yusra-mag-1">
-                            <SidebarMenuButton asChild>
-                                <a href="/">
-                                    <Baby />
-                                    <span>Year 1</span>
-                                </a>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
+                        {mags.map((mag) => (
+                            <SidebarMenuItem key={mag.name}>
+                                <SidebarMenuButton asChild>
+                                    <a href={mag.url}>
+                                        <Baby />
+                                        <span>{mag.name}</span>
+                                    </a>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        ))}
                     </SidebarMenu>
                 </SidebarGroupContent>
             </SidebarGroup>

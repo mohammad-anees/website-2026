@@ -6,3 +6,8 @@ export const projects = [
     { name: 'RigUp', url: '/', icon: () => <Fuel /> },
     { name: 'General Motors', url: '/', icon: () => <Car /> },
 ]
+
+export const mags = [
+    { name: 'Year 2', url: '/' },
+    { name: 'Year 1', url: '/' }
+]
