@@ -1,24 +1,27 @@
+'use client';
+
 import { Separator } from "@/components/ui/separator"
 import {
     Sidebar,
-    SidebarContent,
-    SidebarFooter,
     SidebarGroup,
-    SidebarGroupAction,
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Pyramid } from "lucide-react"
 import { navigation } from "./navigation.data"
+import { usePathname } from "next/navigation"
 
 export function AppSidebar() {
+    const pathname = usePathname()
+
+    const isActivePath = (url: string) => (pathname === url)
+
     return (
-        <Sidebar>
+        <Sidebar variant="floating">
             <SidebarHeader className="mt-2">
                 <SidebarMenu>
                     <SidebarMenuItem>
@@ -31,12 +34,12 @@ export function AppSidebar() {
                 </SidebarMenu>
             </SidebarHeader>
             {navigation.map((navSection) => (
-                <SidebarGroup key={navSection.sectionTitle}>
+                <SidebarGroup key={navSection.sectionTitle} className="list-none">
                     <SidebarGroupLabel>{navSection.sectionTitle}</SidebarGroupLabel>
                     <SidebarGroupContent>
                         {navSection.links.map((link) => (
                             <SidebarMenuItem key={link.name}>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton asChild isActive={isActivePath(link.url)}>
                                     <a href={link.url}>
                                         {link.icon}
                                         <span>{link.name}</span>

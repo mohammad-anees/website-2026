@@ -1,3 +1,5 @@
+'use client';
+
 import {
     Menubar,
     MenubarContent,
@@ -10,11 +12,13 @@ import {
 import { Pyramid } from "lucide-react"
 import { navigation } from './navigation.data'
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 
 export const NavBar = () => {
-    const onNavigateHandler = (url: string) => {
+    const pathname = usePathname()
 
-    }
+    const isActivePath = (url: string) => pathname === url ? 'bg-accent' : ''
+
     return (
         <Menubar className="w-full rounded-none">
             <MenubarLabel className="flex gap-2">
@@ -30,7 +34,7 @@ export const NavBar = () => {
                     <MenubarContent>
                         <MenubarGroup>
                             {navSection.links.map((link) => (
-                                <MenubarItem key={link.name}>
+                                <MenubarItem key={link.name} className={isActivePath(link.url)}>
                                     <Link href={link.url} className="flex gap-3 items-center">
                                         {link.icon}{link.name}
                                     </Link>

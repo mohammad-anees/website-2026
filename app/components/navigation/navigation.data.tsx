@@ -16,17 +16,17 @@ export const navigation: Navigation[] = [
     {
         sectionTitle: "Experience",
         links: [
-            { name: 'Ask AI Assistant', url: '/', icon: <BotMessageSquare /> },
-            { name: 'StockX', url: '/', icon: <X /> },
-            { name: 'RigUp', url: '/', icon: <Fuel /> },
-            { name: 'General Motors', url: '/', icon: <Car /> },
+            { name: 'Ask AI Assistant', url: '/experience/query', icon: <BotMessageSquare /> },
+            { name: 'StockX', url: '/experience/stockx', icon: <X /> },
+            { name: 'RigUp', url: '/experience/rig-up', icon: <Fuel /> },
+            { name: 'General Motors', url: '/experience/gm', icon: <Car /> },
         ]
     },
     {
         sectionTitle: "Yusra Mags",
         links: [
-            { name: 'Year 2', url: '/', icon: <Baby /> },
-            { name: 'Year 1', url: '/', icon: <Baby /> }
+            { name: 'Year 2', url: '/yusra-mag/year-two', icon: <Baby /> },
+            { name: 'Year 1', url: '/yusr-mag/year-one', icon: <Baby /> }
         ]
     }
 ]
