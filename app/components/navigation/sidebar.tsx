@@ -13,8 +13,8 @@ import {
     SidebarMenuItem,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { Baby, BotMessageSquare, Car, Fuel, KeySquare, Pyramid, X } from "lucide-react"
-import { projects, mags } from "./projects.data"
+import { Pyramid } from "lucide-react"
+import { navigation } from "./navigation.data"
 
 export function AppSidebar() {
     return (
@@ -22,7 +22,7 @@ export function AppSidebar() {
             <SidebarHeader className="mt-2">
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 px-2">
                             <Pyramid />
                             <h1 className="text-md font-bold uppercase">Mohammad Anees</h1>
                         </div>
@@ -30,48 +30,23 @@ export function AppSidebar() {
                     <SidebarMenuItem className="mt-3"><Separator /></SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-            <SidebarGroup>
-                <SidebarGroupLabel>Professional Experience</SidebarGroupLabel>
-                <SidebarGroupContent>
-                    <SidebarMenu>
-                        <SidebarMenuItem key="llm-search">
-                            <SidebarMenuButton asChild>
-                                <a href="/">
-                                    <BotMessageSquare />
-                                    <span>Ask ChatGPT</span>
-                                </a>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        {projects.map((project) => (
-                            <SidebarMenuItem key={project.name}>
+            {navigation.map((navSection) => (
+                <SidebarGroup key={navSection.sectionTitle}>
+                    <SidebarGroupLabel>{navSection.sectionTitle}</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        {navSection.links.map((link) => (
+                            <SidebarMenuItem key={link.name}>
                                 <SidebarMenuButton asChild>
-                                    <a href={project.url}>
-                                        {project.icon()}
-                                        <span>{project.name}</span>
+                                    <a href={link.url}>
+                                        {link.icon}
+                                        <span>{link.name}</span>
                                     </a>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         ))}
-                    </SidebarMenu>
-                </SidebarGroupContent>
-            </SidebarGroup>
-            <SidebarGroup>
-                <SidebarGroupLabel>Yusra Mag</SidebarGroupLabel>
-                <SidebarGroupContent>
-                    <SidebarMenu>
-                        {mags.map((mag) => (
-                            <SidebarMenuItem key={mag.name}>
-                                <SidebarMenuButton asChild>
-                                    <a href={mag.url}>
-                                        <Baby />
-                                        <span>{mag.name}</span>
-                                    </a>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        ))}
-                    </SidebarMenu>
-                </SidebarGroupContent>
-            </SidebarGroup>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+            ))}
         </Sidebar>
     )
 }

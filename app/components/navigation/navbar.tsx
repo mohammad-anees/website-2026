@@ -5,14 +5,16 @@ import {
     MenubarItem,
     MenubarLabel,
     MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
     MenubarTrigger,
 } from "@/components/ui/menubar"
-import { Baby, BotMessageSquare, Pyramid } from "lucide-react"
-import { projects, mags } from './projects.data'
+import { Pyramid } from "lucide-react"
+import { navigation } from './navigation.data'
+import Link from "next/link"
 
 export const NavBar = () => {
+    const onNavigateHandler = (url: string) => {
+
+    }
     return (
         <Menubar className="w-full rounded-none">
             <MenubarLabel className="flex gap-2">
@@ -22,27 +24,22 @@ export const NavBar = () => {
                 </h1>
             </MenubarLabel>
             <div className="flex-1"></div>
-            <MenubarMenu>
-                <MenubarTrigger>Professional Experience</MenubarTrigger>
-                <MenubarContent>
-                    <MenubarGroup>
-                        <MenubarItem><BotMessageSquare />Ask ChatGPT</MenubarItem>
-                        {projects.map((project) => (
-                            <MenubarItem key={project.name}>{project.icon()}{project.name}</MenubarItem>
-                        ))}
-                    </MenubarGroup>
-                </MenubarContent>
-            </MenubarMenu>
-            <MenubarMenu>
-                <MenubarTrigger>Yusra Mag</MenubarTrigger>
-                <MenubarContent>
-                    <MenubarGroup>
-                        {mags.map((mag) => (
-                            <MenubarItem key={mag.name}><Baby />{mag.name}</MenubarItem>
-                        ))}
-                    </MenubarGroup>
-                </MenubarContent>
-            </MenubarMenu>
+            {navigation.map(navSection => (
+                <MenubarMenu key={navSection.sectionTitle}>
+                    <MenubarTrigger>{navSection.sectionTitle}</MenubarTrigger>
+                    <MenubarContent>
+                        <MenubarGroup>
+                            {navSection.links.map((link) => (
+                                <MenubarItem key={link.name}>
+                                    <Link href={link.url} className="flex gap-3 items-center">
+                                        {link.icon}{link.name}
+                                    </Link>
+                                </MenubarItem>
+                            ))}
+                        </MenubarGroup>
+                    </MenubarContent>
+                </MenubarMenu>
+            ))}
         </Menubar>
     )
 }
