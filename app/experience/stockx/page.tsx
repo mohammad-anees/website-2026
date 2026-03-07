@@ -71,6 +71,8 @@ const StockXExperience = () => {
                         </Button>
                     </CardAction>
                 </CardHeader>
+                <Separator />
+
                 <CardContent className="space-y-2">
                     <div className="pb-2">
                         <p className="text-lg">
@@ -78,7 +80,6 @@ const StockXExperience = () => {
                             successful matches, and order creation and management.
                         </p>
                     </div>
-                    {/* <Separator /> */}
                     <div>
                         <h1 className="text-xl font-bold">Achievements</h1>
                         {stockxAchievementsData.map((achievement, index) => <ExperienceData key={index} {...achievement} />)}
@@ -86,7 +87,7 @@ const StockXExperience = () => {
                     <div>
                         <h1 className="text-xl font-bold mb-1.5">Technologies</h1>
                         <div className="space-x-2 space-y-1">
-                            {stockxTechnologies.map((tech, index) => <Badge variant="darkblue" key={index}>{tech}</Badge>)}
+                            {stockxTechnologies.map((tech, index) => <Badge variant="darkgreen" key={index}>{tech}</Badge>)}
                         </div>
                     </div>
                 </CardContent>
