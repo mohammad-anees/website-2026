@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { ExternalLink } from "lucide-react"
 import Link from "next/link"
 import ExperienceData, { ExperienceDataProps } from "@/app/components/shared/experienceData"
+import { Separator } from "@/components/ui/separator"
 
 const stockxAchievementsData: ExperienceDataProps[] = [
     {
@@ -46,46 +47,49 @@ const stockxAchievementsData: ExperienceDataProps[] = [
     }
 ]
 
-const stockxTechnologies: string[] = ['NodeJs', 'Kafka', 'AWS', 'Postgres', 'Redis', 'Spring Boot', 'Kotlin', 'Php', 'Go']
+const stockxTechnologies: string[] = ['NodeJs', 'Kafka', 'AWS', 'Postgres', 'Redis', 'Apache Flink', 'Spring Boot', 'Kotlin', 'Php', 'Go']
 
 
 const StockXExperience = () => {
     return (
-        <div className="mt-4 self-center w-md md:w-full max-w-2xl">
+        <div className="mt-2 self-center w-md md:w-full max-w-2xl">
             <Card>
                 <CardHeader>
                     <CardTitle>
                         <h1 className="text-3xl pb-1">StockX</h1>
-                        <div className="space-x-2">
-                            <Badge variant="secondary">Nov 2020 - Present</Badge>
-                            <Badge variant="secondary">Senior Software Engineer</Badge>
-                        </div>
+                        <p>Snr. Software Engineer</p>
                     </CardTitle>
                     <CardDescription>
-                        <p>
-                            Engineer on the Core Services Team, responsible for the state of the StockX global market, ensuring
-                            successful matches, and order creation and management.
-                        </p>
+                        <h1 className="text-md font-bold">Nov 2020 - Present</h1>
                     </CardDescription>
                     <CardAction>
-                        <Button variant="secondary"><ExternalLink /></Button>
+                        <Button variant="secondary">
+                            <Link href="https://stockx.com/" target="_blank"><ExternalLink /></Link>
+                        </Button>
                     </CardAction>
                 </CardHeader>
                 <CardContent className="space-y-2">
+                    <div className="pb-2">
+                        <p className="text-lg">
+                            Engineer on the Core Services Team, responsible for the state of the StockX global market, ensuring
+                            successful matches, and order creation and management.
+                        </p>
+                    </div>
+                    {/* <Separator /> */}
                     <div>
                         <h1 className="text-xl font-bold">Achievements</h1>
                         {stockxAchievementsData.map((achievement, index) => <ExperienceData key={index} {...achievement} />)}
                     </div>
                     <div>
                         <h1 className="text-xl font-bold mb-1.5">Technologies</h1>
-                        <div className="space-x-2">
+                        <div className="space-x-2 space-y-1">
                             {stockxTechnologies.map((tech, index) => <Badge className="bg-blue-950 text-blue-300" key={index}>{tech}</Badge>)}
                         </div>
                     </div>
                 </CardContent>
                 <CardFooter className="justify-end">
                     <Button variant="ghost" size="sm">Get More Details</Button>
-                    <Button variant="outline" size="sm">View Full Resume</Button>
+                    <Button variant="outline" size="sm">View Full Resume <ExternalLink /></Button>
                 </CardFooter>
             </Card>
         </div >
