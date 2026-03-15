@@ -9,13 +9,18 @@ import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
 import { Input } from "@/components/ui/input"
 import { Loader, SendHorizonal } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ConversationHistory, ConversationItem, ConversationItemState } from "./conversationHistory";
 
 const Query = () => {
     const [query, setQuery] = useState('')
     const [loading, setLoading] = useState(false)
     const [conversation, setConversation] = useState<ConversationItem[]>([])
+
+    useEffect(() => {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+    }, [conversation])
+
 
     const onSubmitHandler = async () => {
         const currentQuery = query
