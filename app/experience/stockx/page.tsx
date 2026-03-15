@@ -1,18 +1,6 @@
-import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ExternalLink } from "lucide-react"
 import Link from "next/link"
-import ExperienceData, { ExperienceDataProps } from "@/app/components/shared/experienceData"
-import { Separator } from "@/components/ui/separator"
+import { ExperienceDataProps } from "@/app/components/shared/experienceData"
+import ExperienceCard, { ExperienceCardProps } from "@/app/components/shared/experienceCard"
 
 const stockxAchievementsData: ExperienceDataProps[] = [
     {
@@ -44,10 +32,6 @@ const stockxAchievementsData: ExperienceDataProps[] = [
         title: "Fee Configuration Overhaul",
         summary: <>Replaced a inflexible fee system with one that gave the business real configurability. The new system drove <b>$6.5M in Q4 2021</b> alone, with an estimated <b>$37.5M impact projected for 2022</b>.</>
     },
-    {
-        title: "Safe Migration Tooling",
-        summary: "Cutting over from a legacy system to a rebuilt one is risky — you need confidence the new system behaves identically before you flip the switch. I built an internal service that ran both systems in parallel, comparing outputs through custom Datadog dashboards so we could validate parity before every launch."
-    }
 ]
 
 const stockxTechnologies: string[] = [
@@ -55,59 +39,29 @@ const stockxTechnologies: string[] = [
     'Apache Flink', 'Kubernetes', 'Spring Boot', 'Kotlin', 'Php', 'Go'
 ]
 
+const stockxJob = {
+    companyName: 'StockX',
+    title: 'Snr. Software Engineer',
+    start: new Date(),
+    website: 'https://stockx.com/',
+}
+
+const experiencePageDetails: ExperienceCardProps = {
+    job: stockxJob,
+    experience: {
+        summary: 'Engineer on the Core Services Team, responsible for the state of the StockX global market, ensuring successful matches, and order creation and management.',
+        achievements: stockxAchievementsData
+    },
+    tech: {
+        technologies: stockxTechnologies,
+        variant: 'darkgreen'
+    }
+}
 
 const StockXExperience = () => {
     return (
         <div className="py-6 self-center w-md md:w-full max-w-2xl">
-            <Card>
-                <CardHeader>
-                    <CardTitle>
-                        <h1 className="text-3xl pb-1">StockX</h1>
-                        <p>Snr. Software Engineer</p>
-                    </CardTitle>
-                    <CardDescription>
-                        <h1 className="text-md font-bold">Nov 2020 - Present</h1>
-                    </CardDescription>
-                    <CardAction>
-                        <Button variant="secondary">
-                            <Link href="https://stockx.com/" target="_blank"><ExternalLink /></Link>
-                        </Button>
-                    </CardAction>
-                </CardHeader>
-                <Separator />
-
-                <CardContent className="space-y-2">
-                    <div className="pb-2">
-                        <p className="text-lg">
-                            Engineer on the Core Services Team, responsible for the state of the StockX global market, ensuring
-                            successful matches, and order creation and management.
-                        </p>
-                    </div>
-                    <div>
-                        <h1 className="text-xl font-bold">Achievements</h1>
-                        {stockxAchievementsData.map((achievement, index) => <ExperienceData key={index} {...achievement} />)}
-                    </div>
-                    <div>
-                        <h1 className="text-xl font-bold mb-1.5">Technologies</h1>
-                        <div className="space-x-2 space-y-1">
-                            {stockxTechnologies.map((tech, index) => <Badge variant="darkgreen" key={index}>{tech}</Badge>)}
-                        </div>
-                    </div>
-                </CardContent>
-                <CardFooter className="justify-end">
-                    <Link href="/experience/query">
-                        <Button variant="ghost" size="sm">
-                            Get More Details
-                        </Button>
-                    </Link>
-                    <Link href="/" target="_blank">
-                        <Button variant="outline" size="sm">
-                            View Full Resume
-                            <ExternalLink />
-                        </Button>
-                    </Link>
-                </CardFooter>
-            </Card>
+            <ExperienceCard {...experiencePageDetails} />
         </div >
     )
 }
