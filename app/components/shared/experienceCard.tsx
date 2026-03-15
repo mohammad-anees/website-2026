@@ -9,7 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { BotMessageSquareIcon, ExternalLink } from "lucide-react"
+import { BotMessageSquareIcon, ExternalLink, Paperclip } from "lucide-react"
 import Link from "next/link"
 import ExperienceData, { ExperienceDataProps } from "@/app/components/shared/experienceData"
 import { Separator } from "@/components/ui/separator"
@@ -74,16 +74,16 @@ const ExperienceCard = ({ job, experience, tech }: ExperienceCardProps) => {
                 </div>
             </CardContent>
             <CardFooter className="justify-end space-x-1">
+                <Link href="/resume.pdf" target="_blank">
+                    <Button variant="outline" size="sm">
+                        View Full Resume
+                        <Paperclip />
+                    </Button>
+                </Link>
                 <Link href="/experience/query">
                     <Button variant="ghost" size="sm">
                         Get More Details
                         <BotMessageSquareIcon />
-                    </Button>
-                </Link>
-                <Link href="/" target="_blank">
-                    <Button variant="outline" size="sm">
-                        View Full Resume
-                        <ExternalLink />
                     </Button>
                 </Link>
             </CardFooter>
