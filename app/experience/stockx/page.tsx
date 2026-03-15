@@ -42,7 +42,7 @@ const stockxTechnologies: string[] = [
 const stockxJob = {
     companyName: 'StockX',
     title: 'Snr. Software Engineer',
-    start: new Date(),
+    start: new Date('11-1-2020'),
     website: 'https://stockx.com/',
 }
 

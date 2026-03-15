@@ -34,6 +34,10 @@ export interface ExperienceCardProps {
 }
 
 const ExperienceCard = ({ job, experience, tech }: ExperienceCardProps) => {
+    const dateFormat: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' }
+    const startDate = job.start.toLocaleDateString('en-US', dateFormat)
+    const endDate = job.end?.toLocaleDateString('en-US', dateFormat) ?? 'Present'
+
     return (
         <Card>
             <CardHeader>
@@ -42,7 +46,7 @@ const ExperienceCard = ({ job, experience, tech }: ExperienceCardProps) => {
                     <p>{job.title}</p>
                 </CardTitle>
                 <CardDescription>
-                    <h1 className="text-md font-bold">{job.start.toLocaleDateString()} - {job.end?.toLocaleDateString() ?? 'Present'}</h1>
+                    <h1 className="text-md font-bold">{startDate} - {endDate}</h1>
                 </CardDescription>
                 <CardAction>
                     <Button variant="secondary">
