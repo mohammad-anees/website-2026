@@ -5,8 +5,10 @@ import {
     CardDescription,
     CardHeader,
 } from "@/components/ui/card"
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@/components/ui/input-group";
-import { Loader } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { ButtonGroup } from "@/components/ui/button-group"
+import { Input } from "@/components/ui/input"
+import { Loader, SendHorizonal } from "lucide-react";
 import { useState } from "react";
 import { ConversationHistory, ConversationItem } from "./conversationHistory";
 
@@ -17,7 +19,7 @@ const Query = () => {
 
     const onSubmitHandler = async () => {
         const currentQuery = query
-        const conversationItem = { query: currentQuery, response: '', loading: true }
+        const conversationItem = { query: currentQuery, response: '', loading: true, error: false }
         setLoading(true)
         setQuery('')
         setConversation(prev => [...prev, conversationItem])
@@ -29,12 +31,14 @@ const Query = () => {
                 body: JSON.stringify({ query: currentQuery })
             })
             const data: { query: string, response: string } = await res.json()
+            console.log(data);
             conversationItem.response = data.response
         } catch (e) {
             conversationItem.response = 'Error'
         } finally {
             setLoading(false)
             conversationItem.loading = false
+            conversationItem.error = true
             setConversation(prev => [...prev.slice(0, -1), conversationItem])
         }
     }
@@ -47,18 +51,16 @@ const Query = () => {
                     <CardHeader>
                         <CardDescription>Ask an AI agent about my professional experience.</CardDescription>
                         <form onSubmit={(e) => { e.preventDefault(); onSubmitHandler() }}>
-                            <InputGroup className="rounded font-bold">
-                                <InputGroupInput placeholder="" value={query} onChange={(e) => setQuery(e.target.value)} />
-                                <InputGroupAddon align="inline-end">
-                                    <InputGroupButton
-                                        type="submit"
-                                        variant="secondary"
-                                        disabled={loading || query.length === 0}
-                                    >
-                                        {loading ? <Loader className="animate-spin" /> : <>Submit</>}
-                                    </InputGroupButton>
-                                </InputGroupAddon>
-                            </InputGroup>
+                            <ButtonGroup className="w-full">
+                                <Input placeholder="" value={query} onChange={(e) => setQuery(e.target.value)} />
+                                <Button
+                                    type="submit"
+                                    variant="default"
+                                    disabled={loading || query.length === 0}
+                                >
+                                    {loading ? <Loader className="animate-spin" /> : <SendHorizonal />}
+                                </Button>
+                            </ButtonGroup>
                         </form>
                     </CardHeader>
                 </Card>
