@@ -102,11 +102,7 @@ button:hover, a:hover {
 }
 
 html {
-  background-color: var(--background);
-}
-
-body {
-  min-height: 100vh;
+  min-height: 100%;
   background: radial-gradient(
     circle at 100%,
     var(--background),
@@ -114,7 +110,10 @@ body {
     var(--secondary),
     oklch(31.177% 0.01883 174.385)
   );
-  background-size: 100% 100%;
+}
+
+body {
+  min-height: 100vh;
   /* animation: gradientShift 30s ease infinite; */
 }
 
