@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
 import { Progress } from "@/components/ui/progress"
 import Link from 'next/link';
-import { Skeleton } from '@/components/ui/skeleton';
 
 interface PDFViewerProps {
     source: string
@@ -20,10 +19,9 @@ interface PdfComponents {
 
 const PDFViewer = ({ source }: PDFViewerProps) => {
     const [pdf, setPdf] = useState<PdfComponents | null>(null);
-    const [numPages, setNumPages] = useState<number>(1);
-    const [pageNumber, setPageNumber] = useState<number>(1);
+    const [numPages, setNumPages] = useState<number>(0);
+    const [pageNumber, setPageNumber] = useState<number>(0);
     const [containerWidth, setContainerWidth] = useState<number>(0);
-    const [isPageLoading, setIsPageLoading] = useState(true);
     const [docProgress, setDocProgress] = useState<number>(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -48,17 +46,17 @@ const PDFViewer = ({ source }: PDFViewerProps) => {
 
     function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
         setNumPages(numPages);
+        setPageNumber(1);
         setDocProgress(100);
     }
 
     function goToPage(next: number) {
-        setIsPageLoading(true);
         setPageNumber(next);
     }
 
 
     const showDeterminate = docProgress > 0 && docProgress < 100 || docProgress === undefined;
-    const isInitialLoading = (!pdf || showDeterminate)
+    const isInitialLoading = pageNumber === 0
     const pageWidth = containerWidth || undefined;
     const prevPage = pageNumber - 1;
     const nextPage = pageNumber + 1;
@@ -83,7 +81,6 @@ const PDFViewer = ({ source }: PDFViewerProps) => {
                             <pdf.Page
                                 pageNumber={pageNumber}
                                 width={pageWidth}
-                                onRenderSuccess={() => setIsPageLoading(false)}
                             />
                             {prevPage >= 1 && (
                                 <div className="hidden">
@@ -104,7 +101,7 @@ const PDFViewer = ({ source }: PDFViewerProps) => {
                         <ButtonGroup>
                             <Button
                                 variant="outline"
-                                onClick={() => goToPage(pageNumber - 1)} disabled={pageNumber === 1}>
+                                onClick={() => goToPage(pageNumber - 1)} disabled={pageNumber <= 1}>
                                 <ArrowLeftIcon />
                             </Button>
                             <Button variant="outline" disabled>
