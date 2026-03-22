@@ -64,7 +64,6 @@ const Query = () => {
                                     <Input placeholder="" value={query} onChange={(e) => setQuery(e.target.value)} />
                                     <Button
                                         type="submit"
-                                        variant=""
                                         disabled={loading || query.length === 0}
                                     >
                                         {loading ? <Loader className="animate-spin" /> : <SendHorizonal />}
