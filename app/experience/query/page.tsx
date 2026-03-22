@@ -9,17 +9,28 @@ import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
 import { Input } from "@/components/ui/input"
 import { Loader, SendHorizonal } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ConversationHistory, ConversationItem, ConversationItemState } from "./conversationHistory";
+import { useSearchParams } from "next/navigation";
 
 const Query = () => {
-    const [query, setQuery] = useState('')
+    const searchParams = useSearchParams()
+    const initialQuery = searchParams.get('query') ?? ''
+    const hasAutoSubmitted = useRef<boolean>(false)
+    const [query, setQuery] = useState(initialQuery)
     const [loading, setLoading] = useState(false)
     const [conversation, setConversation] = useState<ConversationItem[]>([])
 
     useEffect(() => {
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
     }, [conversation])
+
+    useEffect(() => {
+        if (initialQuery !== '' && !hasAutoSubmitted.current) {
+            hasAutoSubmitted.current = true
+            onSubmitHandler()
+        }
+    }, [])
 
 
     const onSubmitHandler = async () => {
@@ -36,7 +47,6 @@ const Query = () => {
                 body: JSON.stringify({ query: currentQuery })
             })
             const data: { query: string, response: string, invalidQuery: boolean } = await res.json()
-            console.log(data);
 
             conversationItem.response = data.response
             conversationItem.state = data.invalidQuery ?
