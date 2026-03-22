@@ -104,12 +104,10 @@ button:hover, a:hover {
 
 html {
   min-height: 100%;
-  background: radial-gradient(
-    circle at 100%,
+  background: linear-gradient(
+    to bottom,
     var(--background),
-    var(--card),
-    var(--secondary),
-    oklch(31.177% 0.01883 174.385)
+    var(--card)
   );
 }
 

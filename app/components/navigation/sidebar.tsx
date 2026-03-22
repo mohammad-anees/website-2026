@@ -3,6 +3,8 @@
 import { Separator } from "@/components/ui/separator"
 import {
     Sidebar,
+    SidebarContent,
+    SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
@@ -11,9 +13,10 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Boxes } from "lucide-react"
+import { Boxes, Code, GitBranchPlus, GithubIcon } from "lucide-react"
 import { navigation } from "./navigation.data"
 import { usePathname } from "next/navigation"
+import Link from "next/link";
 
 export function AppSidebar() {
     const pathname = usePathname()
@@ -33,23 +36,25 @@ export function AppSidebar() {
                     <SidebarMenuItem className="mt-3"><Separator /></SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-            {navigation.map((navSection) => (
-                <SidebarGroup key={navSection.sectionTitle} className="list-none">
-                    <SidebarGroupLabel>{navSection.sectionTitle}</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        {navSection.links.map((link) => (
-                            <SidebarMenuItem key={link.name}>
-                                <SidebarMenuButton asChild isActive={isActivePath(link.url)}>
-                                    <a href={link.url}>
-                                        {link.icon}
-                                        <span>{link.name}</span>
-                                    </a>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        ))}
-                    </SidebarGroupContent>
-                </SidebarGroup>
-            ))}
+            <SidebarContent>
+                {navigation.map((navSection) => (
+                    <SidebarGroup key={navSection.sectionTitle} className="list-none">
+                        <SidebarGroupLabel>{navSection.sectionTitle}</SidebarGroupLabel>
+                        <SidebarGroupContent>
+                            {navSection.links.map((link) => (
+                                <SidebarMenuItem key={link.name}>
+                                    <SidebarMenuButton asChild isActive={isActivePath(link.url)}>
+                                        <a href={link.url}>
+                                            {link.icon}
+                                            <span>{link.name}</span>
+                                        </a>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+                        </SidebarGroupContent>
+                    </SidebarGroup>
+                ))}
+            </SidebarContent>
         </Sidebar>
     )
 }
