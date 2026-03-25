@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Analytics } from '@vercel/analytics/next';
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/navigation/sidebar";
 import { NavBar } from "./components/navigation/navbar";
 
@@ -29,9 +30,8 @@ export default function RootLayout({
             </TooltipProvider>
           </main>
         </SidebarProvider>
+        <Analytics />
       </body>
-
     </html>
-
   );
 }
